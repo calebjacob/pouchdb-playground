@@ -2,13 +2,15 @@
   var db = new PouchDB('playground');
 
   db.replicate.to('http://calebjacob.com:6690/test', {
-    live: true
+    live: true,
+    retry: true
   }, function(error) {
     console.log(error);
   });
 
   db.replicate.from('http://calebjacob.com:6690/test', {
-    live: true
+    live: true,
+    retry: true
   }, function(error) {
     console.log(error);
   });
