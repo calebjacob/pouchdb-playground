@@ -1,14 +1,17 @@
 (function() {
-  var db = new PouchDB('playground');
+  var db = new PouchDB('playground', {
+    auto_compaction: true,
+    size: 1000
+  });
 
-  db.replicate.to('http://calebjacob.com:6690/test', {
+  db.replicate.to('http://calebjacob.com:6690/poop', {
     live: true,
     retry: true
   }, function(error) {
     console.log(error);
   });
 
-  db.replicate.from('http://calebjacob.com:6690/test', {
+  db.replicate.from('http://calebjacob.com:6690/poop', {
     live: true,
     retry: true
   }, function(error) {
@@ -32,8 +35,8 @@
       });
   }
 
-  var button = document.querySelector('button');
-  button.addEventListener('click', createThing);
+  var createButton = document.querySelector('#create');
+  createButton.addEventListener('click', createThing);
 
 
 
@@ -67,4 +70,21 @@
       live: true
     })
     .on('change', renderThings);
+
+
+
+
+  function loadThing() {
+    db
+      .get('B59FF33F-CC29-EEF7-AE9C-06D3F5F9E61E')
+      .then(function(result) {
+        console.log('result', result);
+      })
+      .catch(function(error) {
+        console.log('error', error);
+      });
+  }
+
+  var loadButton = document.querySelector('#load');
+  loadButton.addEventListener('click', loadThing);
 })();
