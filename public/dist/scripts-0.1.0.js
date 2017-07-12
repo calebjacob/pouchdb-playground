@@ -14465,13 +14465,13 @@ module.exports = PouchDB$5;
 });(function() {
   var db = new PouchDB('playground');
 
-  db.replicate.to('http://localhost:5984/things', {
+  db.replicate.to('http://calebjacob.com:6690/test', {
     live: true
   }, function(error) {
     console.log(error);
   });
 
-  db.replicate.from('http://localhost:5984/things', {
+  db.replicate.from('http://calebjacob.com:6690/test', {
     live: true
   }, function(error) {
     console.log(error);
